@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { catchError, from, map, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from 'src/auth/services/auth.service';
-import { Repository } from 'typeorm';
+import { Any, Repository } from 'typeorm';
 import { UserEntity } from './model/user.entity';
 import { Role, User } from './model/user.interface';
 
@@ -41,6 +41,8 @@ export class UserService {
 findOne(id: string): Observable<User> {
   return from(this.userRepository.findOne({where:{id}})).pipe(
       map((user: User) => {
+        console.log(user);
+        
           const {password, ...result} = user;
           return result;
       } )
@@ -69,6 +71,10 @@ updateOne(id: string, user: User): Observable<any> {
   delete user.role;
 
   return from(this.userRepository.update(id, user))
+}
+
+updateRoleOfUser(id: string, user: User): Observable<any> {
+  return from(this.userRepository.update(id, user));
 }
 
 

@@ -1,16 +1,16 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseGuards, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { catchError, map, Observable, of } from 'rxjs';
-import { User } from './model/user.interface';
+import { Role, User } from './model/user.interface';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { hasRoles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService) { }
 
-  @Post('signup')
+    @Post('signup')
     create(@Body() user: User): Observable<User | Object> {
         return this.userService.create(user).pipe(
             map((user: User) => user),
@@ -33,22 +33,29 @@ export class UserController {
     }
 
 
-@hasRoles('Admin')
-@UseGuards(JwtAuthGuard,RolesGuard)
- @Get()
- findAll():Observable<User[]>{
-    return this .userService.findAll();
- }
+    @hasRoles(Role.ADMIN)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get()
+    findAll(): Observable<User[]> {
+        return this.userService.findAll();
+    }
 
- @Delete(':id')
- deleteOne(@Param('id')id:string):Observable<User>{
-    return this.userService.deleteOne(id)
- }
+    @Delete(':id')
+    deleteOne(@Param('id') id: string): Observable<User> {
+        return this.userService.deleteOne(id)
+    }
 
 
- @Put(':id')
- updateOne(@Param('id')id:string,@Body()user:User):Observable<any>{
-    return this.userService.updateOne(id,user)
- }
-    
+    @Put(':id')
+    updateOne(@Param('id') id: string, @Body() user: User): Observable<any> {
+        return this.userService.updateOne(id, user)
+    }
+
+    @hasRoles(Role.ADMIN)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Put(':id/role')
+    updateRoleOfUser(@Param('id') id: string, @Body() user: User): Observable<User> {
+        return this.userService.updateRoleOfUser(id, user)
+    }
+
 }

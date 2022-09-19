@@ -1,14 +1,12 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { JwtModule} from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+// import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthService } from './services/auth.service';
-
-// import { JwtAuthGuard } from './guards/jwt-guard';
 import { JwtStrategy } from './guards/jwt-strategy';
 import { UserModule } from 'src/user/user.module';
 import { RolesGuard } from './guards/roles.guard';
-import { JwtAuthGuard } from './guards/jwt-guard';
 import { PassportModule } from '@nestjs/passport';
+import { JwtAuthGuard } from './guards/jwt-guard';
 
 @Module({
     imports: [
@@ -22,10 +20,10 @@ import { PassportModule } from '@nestjs/passport';
             //     signOptions: {expiresIn: '10000s'}
             // })
                 secret: "library!@#$%",
-                signOptions: {expiresIn: '10000s'}
+                signOptions: {expiresIn: '10000s'},
         })
     ],
     providers: [AuthService,   RolesGuard, JwtAuthGuard, JwtStrategy ],
-    exports: [AuthService]
+    exports: [AuthService, RolesGuard, JwtAuthGuard, JwtStrategy ]
 })
 export class AuthModule { }

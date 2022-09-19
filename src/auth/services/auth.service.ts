@@ -11,7 +11,7 @@ export class AuthService {
     constructor(private readonly jwtService: JwtService){}
 
     generateJWT(user: User): Observable <string> {
-        return from(this.jwtService.sign({user}));
+        return from(this.jwtService.signAsync({user}));
     }
 
     hashPassword(password: string): Observable <string> {
@@ -19,8 +19,8 @@ export class AuthService {
 
     }
 
-    comparePasswords(newPassword: string, passwortHash: string): Observable<any>{
-        return from(bcrypt.compare(newPassword, passwortHash));
+    comparePasswords(newPassword: string, passwortHash: string): Observable<any | boolean>{
+return of<any|boolean>(bcrypt.compare(newPassword, passwortHash));
     }
 
 }
