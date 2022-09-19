@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm'
 
 
 
@@ -22,6 +22,12 @@ export class Book {
 
    @Column()
    quantity: number
+
+   @CreateDateColumn()
+   issued_At: Date;
+ 
+   @CreateDateColumn()
+   returned_At: Date;
    
 
 
