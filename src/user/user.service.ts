@@ -106,7 +106,7 @@ validateUser(email: string, password: string): Observable<User> {
           map((match: boolean) => {
               if(match) {
                   const {password, ...result} = user;
-                  console.log(result);
+                  // console.log(result);
                   
                   return result;
               } else {

@@ -64,15 +64,17 @@ export class UserController {
     }
     
 
-    @Post()
-    IssueBook(@Param('id') id:string):Observable<any>{
-return from(this.userService.findOne(id)).pipe(
-    map(user=>{
-        if(!user){
-            throw new NotFoundException()
-        }
-    })
+//     @Post()
+//     IssueBook(@Param('id') id:string):Observable<any>{
+// return from(this.userService.findOne(id)).pipe(
+//     map(user=>{
+//         console.log(user);
+        
+//         if(!user){
+//             throw new NotFoundException()
+//         }
+//     })
     
-)
-    }
+// )
+//     }
 }

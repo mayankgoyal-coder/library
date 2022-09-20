@@ -65,7 +65,7 @@ findByUser(userId:any):Observable<Book[]>{
 
 
 // findOne(id: string): Observable<Book> {
-//   return from(this.bookRepository.findOne({where:{id}}, {relations: ['author']}));
+//   return of(this.bookRepository.findOne({where:{id}}, {relations: ['author']}));
 // }
 
 updateOne(id: string, book: Book): Observable<Book> {
@@ -81,3 +81,4 @@ deleteOne(id: string): Observable<any> {
 
 
 }
+ 
