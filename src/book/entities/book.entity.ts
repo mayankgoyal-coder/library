@@ -1,4 +1,4 @@
-import { IssueEntity } from 'src/issue/model/issue.entity'
+// import { IssueEntity } from 'src/issue/model/issue.entity'
 import { UserEntity } from 'src/user/model/user.entity'
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BeforeUpdate, JoinColumn, OneToOne } from 'typeorm'
 
