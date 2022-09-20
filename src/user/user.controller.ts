@@ -5,6 +5,7 @@ import { Role, User } from './model/user.interface';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { hasRoles } from 'src/auth/decorators/roles.decorator';
+import { UserIsUserGuard } from 'src/auth/guards/UserIsUser.guard';
 
 @Controller('users')
 export class UserController {
@@ -48,7 +49,7 @@ export class UserController {
         return this.userService.deleteOne(id)
     }
 
-
+    @UseGuards(JwtAuthGuard, UserIsUserGuard)
     @Put(':id')
     updateOne(@Param('id') id: string, @Body() user: User): Observable<any> {
         return this.userService.updateOne(id, user)

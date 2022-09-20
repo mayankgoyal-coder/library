@@ -1,12 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm'
+import { UserEntity } from 'src/user/model/user.entity'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BeforeUpdate } from 'typeorm'
 
 
 
 @Entity()
-export class Book {
+export class BookEntity {
 
    @PrimaryGeneratedColumn('uuid')
-   bookId: string
+   id: string
 
    @Column()
    name: string
@@ -18,17 +19,27 @@ export class Book {
    category: string
 
    @Column()
-   price: string
+   slug: string
+
+   @Column()
+   price: number
 
    @Column()
    quantity: number
 
-   @CreateDateColumn()
-   issued_At: Date;
- 
-   @CreateDateColumn()
-   returned_At: Date;
-   
+   @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+   createdAt: Date;
 
+   @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+   updatedAt: Date;    
+
+   @BeforeUpdate()
+   updateTimestamp() {
+       this.updatedAt = new Date;
+   }
+
+   
+   @ManyToOne(type => UserEntity, user => user.book)
+    author: UserEntity;
 
 }

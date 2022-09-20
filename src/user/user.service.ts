@@ -41,7 +41,7 @@ export class UserService {
 findOne(id: string): Observable<User> {
   return from(this.userRepository.findOne({where:{id}})).pipe(
       map((user: User) => {
-        console.log(user);
+        // console.log(user);
         
           const {password, ...result} = user;
           return result;
@@ -98,6 +98,8 @@ validateUser(email: string, password: string): Observable<User> {
           map((match: boolean) => {
               if(match) {
                   const {password, ...result} = user;
+                  console.log(result);
+                  
                   return result;
               } else {
                   throw Error;
