@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   // constructor(private configService: ConfigService) {
-    constructor(private authService:AuthService){
+    constructor(){
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -18,6 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    return { 'user': payload.user };
+    return { ...payload.user };
   }
 }

@@ -1,4 +1,5 @@
-import { Entity,PrimaryGeneratedColumn,Column, BeforeInsert} from 'typeorm'
+import { BookEntity } from 'src/book/entities/book.entity';
+import { Entity,PrimaryGeneratedColumn,Column, BeforeInsert, OneToMany} from 'typeorm'
 import { Role } from './user.interface';
   
 
@@ -15,7 +16,7 @@ export class UserEntity {
     @Column({unique: true})
     email: string;
 
-    @Column({select:false})
+    @Column()
     password:string
 
     @Column({
@@ -30,5 +31,7 @@ export class UserEntity {
         this.email = this.email.toLowerCase();
     }
 
+    @OneToMany(type => BookEntity, book => book.author)
+    book: BookEntity[];
     
 }
