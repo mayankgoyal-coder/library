@@ -1,7 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { catchError, from, map, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from 'src/auth/services/auth.service';
+import { BookService } from 'src/book/book.service';
+import { BookEntity } from 'src/book/entities/book.entity';
+import { Book } from 'src/book/entities/book.interface';
 import { Any, Repository } from 'typeorm';
 import { UserEntity } from './model/user.entity';
 import { Role, User } from './model/user.interface';
@@ -14,7 +17,12 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private authService:AuthService
+    private authService:AuthService,
+
+    @InjectRepository(BookEntity)
+    private readonly bookRepository:Repository<BookEntity>,
+    @Inject(forwardRef(() => BookService))
+    private bookService: BookService,
   ) { }
 
   create(user: User): Observable<User> {
@@ -113,7 +121,6 @@ validateUser(email: string, password: string): Observable<User> {
 findByMail(email: string): Observable<User> {
   return from(this.userRepository.findOne({where:{email}}));
 }
-
 
 
 

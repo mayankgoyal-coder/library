@@ -1,5 +1,6 @@
+import { IssueEntity } from 'src/issue/model/issue.entity'
 import { UserEntity } from 'src/user/model/user.entity'
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BeforeUpdate } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BeforeUpdate, JoinColumn, OneToOne } from 'typeorm'
 
 
 
@@ -27,19 +28,23 @@ export class BookEntity {
    @Column()
    quantity: number
 
-   @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
-   createdAt: Date;
+//    @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+//    createdAt: Date;
 
-   @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
-   updatedAt: Date;    
+//    @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+//    updatedAt: Date;    
 
-   @BeforeUpdate()
-   updateTimestamp() {
-       this.updatedAt = new Date;
-   }
+//    @BeforeUpdate()
+//    updateTimestamp() {
+//        this.updatedAt = new Date;
+//    }
 
    
    @ManyToOne(type => UserEntity, user => user.book)
     author: UserEntity;
+
+   //  @OneToOne(() => IssueEntity)
+   //  @JoinColumn()
+   //  issue: IssueEntity
 
 }

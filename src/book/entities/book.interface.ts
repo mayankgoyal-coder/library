@@ -1,3 +1,4 @@
+
 import { User } from "src/user/model/user.interface";
 
 export interface Book {
@@ -9,6 +10,6 @@ export interface Book {
     price?: number;
     quantity?:number;
     author?: User;
-    createdAt?: Date;
-    updatedAt?: Date;
-}
+//     createdAt?: Date;
+//     updatedAt?: Date;
+ }
