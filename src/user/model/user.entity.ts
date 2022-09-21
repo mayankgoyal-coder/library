@@ -1,4 +1,5 @@
 import { BookEntity } from 'src/book/entities/book.entity';
+import { IssueEntity } from 'src/issue/model/issue.entity';
 import { Entity,PrimaryGeneratedColumn,Column, BeforeInsert, OneToMany} from 'typeorm'
 import { Role } from './user.interface';
   
@@ -33,5 +34,8 @@ export class UserEntity {
 
     @OneToMany(type => BookEntity, book => book.author)
     book: BookEntity[];
+
+    @OneToMany(type => IssueEntity, issue => issue.user)
+    issue: IssueEntity[];
     
 }
