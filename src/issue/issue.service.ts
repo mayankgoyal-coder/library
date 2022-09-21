@@ -5,8 +5,9 @@ import { Book } from 'src/book/entities/book.interface';
 import { UserEntity } from 'src/user/model/user.entity';
 import { User } from 'src/user/model/user.interface';
 import { Repository } from 'typeorm';
-import { IssueDto } from './create-issue.dto';
-import { ReturnDto } from './create-return.dto';
+import { IssueDto } from './dto/create-issue.dto';
+import { ReturnDto } from './dto/create-return.dto';
+
 import { IssueEntity } from './model/issue.entity';
 import { ReturnEntity } from './model/return.entity';
 
