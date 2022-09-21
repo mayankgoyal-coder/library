@@ -1,4 +1,4 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { catchError, from, map, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from 'src/auth/services/auth.service';
@@ -121,7 +121,6 @@ validateUser(email: string, password: string): Observable<User> {
 findByMail(email: string): Observable<User> {
   return from(this.userRepository.findOne({where:{email}}));
 }
-
 
 
 }

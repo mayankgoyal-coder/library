@@ -1,4 +1,6 @@
-import { BeforeUpdate, Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
+import { BookEntity } from "src/book/entities/book.entity";
+import { UserEntity } from "src/user/model/user.entity";
+import {  Column, Entity,  ManyToOne,  PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class IssueEntity {
@@ -6,16 +8,24 @@ export class IssueEntity {
     @PrimaryGeneratedColumn('uuid')
     id:string
 
-      @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
-   createdAt: Date;
+  @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+   issueAt: Date;
 
    @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
-   updatedAt: Date;    
+   returnAt: Date;   
+   
+   @Column()
+   userId:string
 
-   @BeforeUpdate()
-   updateTimestamp() {
-       this.updatedAt = new Date;
-   }
+   @Column()
+   bookId:string
+
+   @ManyToOne(type => BookEntity, books=> books.issue)
+   books: BookEntity;
 
 
-}
+   @ManyToOne(type => UserEntity, user=> user.issue)
+   user: UserEntity;
+
+
+ }

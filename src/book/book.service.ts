@@ -35,15 +35,6 @@ generateSlug(name: string): Observable<string> {
 
 
 }
-// const newBook = new BookEntity();
-// return from(this.bookRepository.save(newBook)).pipe(
-//   map((book:Book)=> {
-//     const {...result} = book;
-//     return result
-//   }),
-//   catchError(err => throwError(err))
-// )
-//  }
  
 
 findAll() :Observable<Book[]> {
