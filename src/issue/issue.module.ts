@@ -5,10 +5,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { IssueEntity } from './model/issue.entity';
 import { BookEntity } from 'src/book/entities/book.entity';
 import { UserEntity } from 'src/user/model/user.entity';
-import { ReturnEntity } from './model/return.entity';
+import { AuthModule } from 'src/auth/auth.module';
+import { UserModule } from 'src/user/user.module';
+
 
 @Module({
-  imports:[TypeOrmModule.forFeature([IssueEntity,BookEntity,UserEntity,ReturnEntity])],
+  imports:[TypeOrmModule.forFeature([IssueEntity,BookEntity,UserEntity]),
+AuthModule,
+UserModule
+],
   controllers: [IssueController],
   providers: [IssueService]
 })

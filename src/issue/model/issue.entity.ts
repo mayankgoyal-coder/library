@@ -8,10 +8,10 @@ export class IssueEntity {
     @PrimaryGeneratedColumn('uuid')
     id:string
 
-  @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+   @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
    issueAt: Date;
 
-   @Column({type: 'timestamp', default: () => "CURRENT_TIMESTAMP"})
+   @Column({nullable:true})
    returnAt: Date;   
    
    @Column()
@@ -19,6 +19,9 @@ export class IssueEntity {
 
    @Column()
    bookId:string
+
+   @Column({default:0})
+   fine:number
 
    @ManyToOne(type => BookEntity, books=> books.issue)
    books: BookEntity;

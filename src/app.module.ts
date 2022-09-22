@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { BookModule } from './book/book.module';
-import { ConfigModule } from '@nestjs/config';
+// import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { IssueModule } from './issue/issue.module';
 
@@ -27,7 +27,6 @@ import { IssueModule } from './issue/issue.module';
     AuthModule,
     IssueModule
     ],
-  controllers: [],
-  providers: [],
+  
 })
 export class AppModule {}
